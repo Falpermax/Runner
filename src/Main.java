@@ -9,19 +9,18 @@ import javafx.scene.image.Image;
 
 
 public class Main extends Application{
-    Desert desert = new Desert("desert.png");
-    Hero hero = new Hero(100,100,"heros.png");
+
 
     public void start(Stage primaryStage){
         primaryStage.setTitle("Demo");
         Group root = new Group();
-        Scene scene = new Scene(root, 600, 400);
 
-        primaryStage.setScene(scene);
+
+        GameScene gs = new GameScene(root);
+        primaryStage.setScene(gs);
         primaryStage.show();
 
-        root.getChildren().add(desert.getSprite());
-        root.getChildren().add(hero.getSprite());
+
 
     }
     public static void main(String[] args) {

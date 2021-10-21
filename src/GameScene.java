@@ -1,29 +1,38 @@
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.application.Application;
 
 import javafx.stage.Stage;
 
-public class GameScene {
+public class GameScene extends Scene {
 
-    private Camera camera = new Camera(0,0);
-    private StaticThing backgroundLeft = new StaticThing(0,0,"desert.png");
-    private StaticThing backgroundRight = new StaticThing(0,0,"desert.png");
+    Camera camera;
+    StaticThing backgroundLeft;
+    StaticThing backgroundRight;
+    AnimatedThing hero;
 
 
-    public GameScene(){
+
+    public GameScene(Group g) {
+        super(g,600,400);
+        backgroundRight = new StaticThing(800,400,"desert.png");
+        backgroundLeft = new StaticThing(800,400,"desert.png");
+        hero = new AnimatedThing(0,250,"heros.png",new Rectangle2D(20,0,65,100));
+        camera = new Camera(400,400);
+        render();
+        g.getChildren().add(backgroundLeft.getSprite());
+        g.getChildren().add(backgroundRight.getSprite());
+        g.getChildren().add(hero.getSprite());
 
     }
 
-    public void main(String args[]){
-        Stage primaryStage = new Stage();
-        primaryStage.setTitle("Demo");
-        Group root = new Group();
-        Scene scene = new Scene(root, 600, 400);
-        root.getChildren().add(backgroundLeft.getSprite());
-        root.getChildren().add(backgroundRight.getSprite());
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
+    void render(){
+        double offset = camera.getX()%backgroundLeft.getX();
+        backgroundLeft.getSprite().setViewport(new Rectangle2D(offset, 0,backgroundLeft.getX()-offset, backgroundLeft.getY()));
+        backgroundRight.getSprite().setX(backgroundRight.getX()-offset);
+        //hero.getSprite().setX();
     }
+
 }

@@ -1,19 +1,20 @@
 
 
 public class Camera{
-    private int x;
-    private int y;
+    private double x;
+    private double y;
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public Camera(int x,int y){
-
+    public Camera(double x,double y){
+        this.x = x;
+        this.y=y;
     }
 
     @Override
