@@ -3,16 +3,17 @@ import javafx.scene.image.ImageView;
 
 public class StaticThing {
 
+    double x;
+    double y;
+    private ImageView sprite;
 
     public double getX() {
-        return getSprite().getX();
+        return x;
     }
 
     public double getY() {
-        return getSprite().getY();
+        return y;
     }
-
-    private ImageView sprite;
 
     public ImageView getSprite() {
         return sprite;
@@ -21,8 +22,8 @@ public class StaticThing {
     public StaticThing(double x, double y, String fileName){
         Image spriteSheet = new Image(fileName);
         sprite = new ImageView(spriteSheet);
-        sprite.setX(x);
-        sprite.setY(y);
+        this.x = x;
+        this.y = y;
 
     }
 
