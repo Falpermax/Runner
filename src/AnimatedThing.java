@@ -6,9 +6,10 @@ public class AnimatedThing {
 
     double x;
     double y;
+    Image spriteSheet;
     ImageView sprite;
     int attitude;
-    Rectangle2D tileSize;
+
 
     public ImageView getSprite() {
         return sprite;
@@ -21,15 +22,22 @@ public class AnimatedThing {
     public double getY() {
         return y;
     }
-    public AnimatedThing(double x, double y, String fileName, Rectangle2D tileSize) {
+    public AnimatedThing(double x, double y, String fileName, double xEcran, double yEcran) {
 
-        Image spriteSheet = new Image(fileName);
-        this.tileSize = tileSize;
+        spriteSheet = new Image(fileName);
         this.sprite = new ImageView(spriteSheet);
-        sprite.setViewport(tileSize);
-        sprite.setX(x);
-        sprite.setY(y);
+        sprite.setViewport(new Rectangle2D(0,0,75,100));
+        this.x = x;
+        this.y = y;
+        sprite.setX(xEcran);
+        sprite.setY(yEcran);
 
 
     }
+
+    void update(long time){
+
+
+    }
+
 }
