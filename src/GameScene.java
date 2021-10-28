@@ -12,7 +12,8 @@ public class GameScene extends Scene {
     AnimatedThing hero;
 
     void update(long time){
-
+        camera.setxHero(hero.getX());
+        render();
     }
 
     public GameScene(Group g) {
@@ -22,13 +23,13 @@ public class GameScene extends Scene {
             public void handle(long time) {
                 hero.update(time);
                 camera.update(time);
-                //this.update(time);
+                update(time);
             }
         };
         backgroundLeft = new StaticThing(0,0,"desert.png");
         backgroundRight = new StaticThing(800,0,"desert.png");
         hero = new Hero(0,0,"heros.png",250,250);
-        camera = new Camera(400,0);
+        camera = new Camera(0,0);
         //System.out.println(backgroundLeft.getSprite().getImage().getWidth());
         render();
         g.getChildren().add(backgroundLeft.getSprite());
