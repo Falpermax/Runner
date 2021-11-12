@@ -3,15 +3,18 @@
 public class Camera{
     private double x;
     private double y;
-    private double xHero;
+    private double vx;
+    private double ax;
+    private double offsetRessort;
 
-    public double getxHero() {
-        return xHero;
+
+    public double getOffsetRessort() {
+        return offsetRessort;
     }
 
-    public void setxHero(double xHero) {
-        this.xHero = xHero;
-    }
+
+
+
 
     public void setX(double x) {
         this.x = x;
@@ -32,6 +35,8 @@ public class Camera{
     public Camera(double x,double y){
         this.x = x;
         this.y=y;
+        vx = 0;
+        ax=0;
     }
 
     @Override
@@ -39,16 +44,20 @@ public class Camera{
         return x+","+y;
     }
 
-    void update(long time){
+    void update(long time, double xHero){
 
 
+        //if (time>1) time = 0;
 
-        double km = 1;
-        double fm = 1.2;
-        double v = (xHero - x) / 0.016;
-        double a = km * (xHero - x) + fm * v;
-        double vx = a*0.016;
-        x = x + vx * 0.016;
+
+        double km = 3;
+        double fm = 3;
+        ax = km * (xHero - x) - fm * vx;
+        vx += ax * 0.016;
+        offsetRessort = vx * 0.016;
+        x += offsetRessort;
+        //System.out.println(offsetRessort);
+
 
     }
 
