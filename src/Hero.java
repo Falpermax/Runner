@@ -5,9 +5,11 @@ public class Hero extends AnimatedThing {
     int attitude; //0 : IDLE; 1 : RUN; 2 : SAUT ; 3 : CHUTE;
     int indexSprite;
     int compteur;
-    final double HAUTEUR_SAUT;
+    boolean touched;
     final double VITESSE;
     double vy;
+    double INVICIBILITY;
+    double invicibility;
 
     public int getAttitude() {
         return attitude;
@@ -22,7 +24,9 @@ public class Hero extends AnimatedThing {
         compteur = 0;
         vy = 0;
         VITESSE = 4;
-        HAUTEUR_SAUT = 100;
+        INVICIBILITY = 2; // durée d'invicibilité en secondes
+        invicibility = 0;
+        touched = false;
     }
 
 
@@ -30,63 +34,87 @@ public class Hero extends AnimatedThing {
 
     void update(long time,double xCam){
         compteur++;
+        y = sprite.getY();
         if (attitude == 2){ // SAUTE
             double ay = 1000;
-
             sprite.setY(sprite.getY() - vy*0.016);
             vy -= ay*0.016;
             x=x+VITESSE;
-            //System.out.println(vy);
             if (vy <= 0 ){
                 attitude = 3 ;
             }
         }
 
-        else if (attitude == 3 && sprite.getY()< 250){ // CHUTE
+        else if (attitude == 3 && sprite.getY()< 250){ // Conditions pour la chute, le héro ne monte plus et descend et n'a pas encore atteint le sol
             double ay = 500;
             vy += ay*0.016;
             sprite.setY(sprite.getY() + vy*0.016);
             x=x+VITESSE;
         }
-        else if (attitude == 3){
+        else if (attitude == 3){ // le héro à atteint le sol;
             vy = 0;
             sprite.setY(250);
             attitude = 1;
         }
         sprite.setX(x-xCam);
-        if (attitude == 1){ // AVANCE
+        if (attitude == 1){ // fait avancer le héro
             x=x+VITESSE;
         }
-        if (compteur==7) { // Pour annimation uniquement
+        if(touched && (compteur == 3 || compteur == 6)){ //Fait disparaitre le héro pour l'effet clignotement quand le héro est touché
+            animationInvincibilite();
+        }
+        if (compteur==7) { //Joue l'animation de course du héro
             compteur = 0;
-            //System.out.println("Anime");
-            if (attitude == 0) {
+            if (attitude == 0) { //Quand le héro attend (au tout début)
                 indexSprite = 0;
 
             }
-            if (attitude == 1) {
+            if (attitude == 1) { //Défile les sprite du héros quand il cour
                 indexSprite++;
                 indexSprite = indexSprite % 6;
 
 
             }
-            sprite.setViewport(new Rectangle2D(indexSprite*84, 0, 84, 100));
-        }
-        //fait avancer le personnage
-   /*     if (x>1000){
-            attitude = 0;
 
-        }*/
+            sprite.setViewport(new Rectangle2D(indexSprite*84, 0, 84, 100));
+
+
+        }
+
+
+        if (touched){ //Compte le temps d'invicibilite restant quand le hero est touché
+            calculInvincibilite();
+            if (invicibility>INVICIBILITY){
+                touched = false;
+                invicibility = 0;
+            }
+
+
+        }
     }
 
 
-    void jump(){
-        if(attitude != 2){
+    void jump(){ //Est appelé pour faire sauter le héro
+        if(attitude == 1){
             attitude = 2;
             vy = 500;
         }
     }
 
+    void calculInvincibilite(){
+        invicibility = invicibility + 0.016;
+    }
 
+    public void estTouche(){
+        touched = true;
+    }
 
+    public boolean estInvincible(){
+        return touched;
+    }
+
+    void animationInvincibilite(){
+        sprite.setViewport(new Rectangle2D(0,0,1,1));
+
+    }
 }

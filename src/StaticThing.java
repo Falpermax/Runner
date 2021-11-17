@@ -5,7 +5,7 @@ public class StaticThing {
 
     double x;
     double y;
-    private ImageView sprite;
+    ImageView sprite;
 
     public double getX() {
         return x;

@@ -38,5 +38,11 @@ public class AnimatedThing {
     }
 
 
+    public Rectangle2D getHitBox(){
+
+            return new Rectangle2D(x,y,50,50);
+
+    }
+
 
 }
