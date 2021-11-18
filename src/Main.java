@@ -17,10 +17,13 @@ public class Main extends Application{
 
         Group root = new Group();
 
+        //Créer une scène qui sert de menu principal
         Menu menuStart = new Menu(root);
         primaryStage.setScene(menuStart);
         primaryStage.setTitle("Menu Principal");
         primaryStage.setResizable(false);
+
+        //Quand le bouton est cliqué, on lance la scène de jeu
         menuStart.getStart().setOnAction(new EventHandler<ActionEvent>() {
 
             @Override

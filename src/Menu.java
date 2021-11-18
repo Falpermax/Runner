@@ -25,11 +25,11 @@ public class Menu extends Scene {
 
         start = new Button("Commencer");
         titreImage = new Image("runner.png");
-        titre = new ImageView(titreImage);
+        titre = new ImageView(titreImage); //Affiche l'image "Runner" au centre
         titre.setX(150);
         titre.setY(150);
 
-        start.getTransforms().add(new Translate(250,250));
+        start.getTransforms().add(new Translate(250,250)); // Deplace le bouton au centre
         g.getChildren().add(titre);
         g.getChildren().add(start);
 

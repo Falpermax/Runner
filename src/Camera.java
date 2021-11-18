@@ -8,29 +8,10 @@ public class Camera{
     private double offsetRessort;
 
 
-    public double getOffsetRessort() {
-        return offsetRessort;
-    }
-
-
-
-
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
     public double getX() {
         return x;
     }
 
-    public double getY() {
-        return y;
-    }
 
     public Camera(double x,double y){
         this.x = x;
@@ -44,19 +25,15 @@ public class Camera{
         return x+","+y;
     }
 
+    //Calcul la position de la caméra enfonction de la position du héro selon un effet ressort
+    // l'effet prinicipalement visible qu'au début.
     void update(long time, double xHero){
-
-
-        //if (time>1) time = 0;
-
-
         double km = 3;
         double fm = 3;
         ax = km * (xHero - x) - fm * vx;
         vx += ax * 0.016;
         offsetRessort = vx * 0.016;
         x += offsetRessort;
-        //System.out.println(offsetRessort);
 
 
     }

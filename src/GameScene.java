@@ -34,34 +34,38 @@ public class GameScene<event> extends Scene {
     ImageView gameOverImageView;
 
     void update(long time, Group g, boolean b){
-
+        //recalcule l'image du background.
         render();
-        if (numberOfLifes>=0 && camera.getX()>sector*2000-1000){
 
+        //Demande l'apparition d'ennemis dans le secteur suivant celui où se situe le héro
+        //Les secteur sont découpés en portions de 2000 unités de position.
+        if (numberOfLifes>=0 && camera.getX()>sector*2000-1000){
             spawnEnemies(enemies,g);
             sector++;
         }
+
+        //Fait afficher le score qui est la distance parcourue par le héro
         score = (int)hero.getX();
         labelScore.setText("Score : " + score);
 
-
-
+        //Si le héro n'est pas invicible, si il est touché, on lui retire une vie
+        //Si il est touché quand il lui reste qu'une vie le jeu s'arrête
         if (!b){
             for (Enemy e : enemies){
                 if(e.getHitBox().intersects(hero.getHitBox())){
-                    //System.out.println("TOUCHE !!");
                     hero.estTouche();
                     e.setToAnimate(true);
-                    if (numberOfLifes >0){
+                    if (numberOfLifes >1){
                         life.get(numberOfLifes-1).setBlack();
                         numberOfLifes--;
                     }
+
                     else {
                         numberOfLifes--;
                         g.getChildren().clear();
                         g.getChildren().add(gameOverImageView);
                         gameOverImageView.setViewport(new Rectangle2D(125,50,1000,1000));
-                        //System.out.println("fin du jeu !");
+
                     }
                 }
             }
@@ -72,6 +76,8 @@ public class GameScene<event> extends Scene {
 
     public GameScene(Group g) {
         super(g,600,400);
+
+        //Démarre le timer qui appelle les updates des objets du jeu toutes les 16ms.
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long time) {
@@ -83,6 +89,7 @@ public class GameScene<event> extends Scene {
                 }
             }
         };
+        //Initialisation de toutes les variables et objets de la scène.
         gameOver = new Image("game over.jpg");
         gameOverImageView = new ImageView(gameOver);
         numberOfLifes = 3;
@@ -90,7 +97,6 @@ public class GameScene<event> extends Scene {
         labelScore = new Text("Score : ");
         labelScore.getTransforms().add(new Translate(400,50));
         labelScore.getTransforms().add(new Scale(2,2));
-        this.setOnMouseClicked((event)->{hero.jump();});
         enemies = new ArrayList<Enemy>();
         life = new ArrayList<Heart>();
         backgroundLeft = new StaticThing(0,0,"desert.png");
@@ -119,8 +125,11 @@ public class GameScene<event> extends Scene {
         g.getChildren().add(labelScore);
         timer.start();
 
+        //Déclare la sensibilité à l'évènement clic gauche souris
+        this.setOnMouseClicked((event)->{hero.jump();});
     }
 
+    //Calcul le background à afficher en selon la position de la camera.
     void render(){
 
         double offset = (camera.getX())%backgroundLeft.getSprite().getImage().getWidth();
@@ -131,21 +140,20 @@ public class GameScene<event> extends Scene {
     }
 
 
-
+    //Fait apparaître entre 2 et 7 ennemis aléatoirement dans le secteur suivant.
     void spawnEnemies(ArrayList<Enemy> e,Group g){
         int randomNumber = getRandomNumberInRange(2,7);
 
         for (int i = 0; i<randomNumber; i++){
 
+            //Les secteur sont découpés en portions de 2000 unités de position.
             if(previousSpawn<(sector+1)*2000){
                 int randomSpawn = getRandomNumberInRange(previousSpawn,(sector+1)*2000);
                 previousSpawn = randomSpawn+100;
-                //System.out.println((randomSpawn));
                 Enemy enemy = new Enemy(randomSpawn,250,"cactus sprite.png",300,250);
                 enemy.getSprite().setFitHeight(100);
                 enemy.getSprite().setPreserveRatio(true);
                 e.add(enemy);
-
                 g.getChildren().add(enemy.getSprite());
 
             }
@@ -158,6 +166,7 @@ public class GameScene<event> extends Scene {
 
     }
 
+    //Fonction utile pour générer des entier aléatoire entre deux valeurs
     private static int getRandomNumberInRange(int min, int max) {
 
         if (min >= max) {

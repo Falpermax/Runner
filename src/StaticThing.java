@@ -11,10 +11,6 @@ public class StaticThing {
         return x;
     }
 
-    public double getY() {
-        return y;
-    }
-
     public ImageView getSprite() {
         return sprite;
     }

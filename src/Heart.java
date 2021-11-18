@@ -14,6 +14,7 @@ public class Heart extends StaticThing {
 
     }
 
+    //Transforme le coeur en "coeur vide" quand le joueur perd une vie
     public void setBlack(){
         sprite.setViewport(new Rectangle2D(15,0,15,13));
     }
