@@ -125,7 +125,7 @@ public class GameScene<event> extends Scene {
         g.getChildren().add(labelScore);
         timer.start();
 
-        //Déclare la sensibilité à l'évènement clic gauche souris
+        //Déclare la sensibilité à l'évènement clic gauche souris.
         this.setOnMouseClicked((event)->{hero.jump();});
     }
 

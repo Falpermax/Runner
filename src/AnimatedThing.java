@@ -37,7 +37,7 @@ public class AnimatedThing {
 
     }
 
-    //Retourne la hitBox des AnimatedThing, identique à toutes les instances issue d'AnimatedThing
+    //Retourne la hitBox des AnimatedThing, identique à toutes les instances issue d'AnimatedThing.
     public Rectangle2D getHitBox(){
 
             return new Rectangle2D(x,y,50,50);

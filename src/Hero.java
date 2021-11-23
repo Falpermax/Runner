@@ -19,7 +19,7 @@ public class Hero extends AnimatedThing {
         compteur = 0;
         vy = 0;
         VITESSE = 4; // vitesse du héro en pixel/16ms
-        INVICIBILITY = 2; // durée d'invicibilité en secondes
+        INVICIBILITY = 2; // durée d'invicibilité en secondes.
         invicibility = 0;
         touched = false;
     }

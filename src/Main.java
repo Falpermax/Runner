@@ -23,7 +23,7 @@ public class Main extends Application{
         primaryStage.setTitle("Menu Principal");
         primaryStage.setResizable(false);
 
-        //Quand le bouton est cliqué, on lance la scène de jeu
+        //Quand le bouton est cliqué, on lance la scène de jeu.
         menuStart.getStart().setOnAction(new EventHandler<ActionEvent>() {
 
             @Override

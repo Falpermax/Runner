@@ -15,6 +15,7 @@ public class StaticThing {
         return sprite;
     }
 
+
     public StaticThing(double x, double y, String fileName){
         Image spriteSheet = new Image(fileName);
         sprite = new ImageView(spriteSheet);

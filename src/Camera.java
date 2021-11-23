@@ -25,7 +25,7 @@ public class Camera{
         return x+","+y;
     }
 
-    //Calcul la position de la caméra enfonction de la position du héro selon un effet ressort
+    //Calcul la position de la caméra enfonction de la position du héro selon un effet ressort.
     // l'effet prinicipalement visible qu'au début.
     void update(long time, double xHero){
         double km = 3;

@@ -25,7 +25,7 @@ public class Menu extends Scene {
 
         start = new Button("Commencer");
         titreImage = new Image("runner.png");
-        titre = new ImageView(titreImage); //Affiche l'image "Runner" au centre
+        titre = new ImageView(titreImage); //Affiche l'image "Runner" au centre.
         titre.setX(150);
         titre.setY(150);
 

@@ -20,7 +20,7 @@ public class Enemy extends AnimatedThing {
     void update(long time, double xCam){
         compteur++;
 
-        //Fait défiler l'ennemi sur l'écran quand la caméra entre dans son périmètre
+        //Fait défiler l'ennemi sur l'écran quand la caméra entre dans son périmètre.
         if (x>xCam-300||x<xCam+300){
             sprite.setX(x-xCam);
         }
