@@ -1,8 +1,5 @@
 import javafx.geometry.Rectangle2D;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
-import java.io.File;
 
 public class Hero extends AnimatedThing {
 
@@ -14,8 +11,7 @@ public class Hero extends AnimatedThing {
     double vy;
     double INVICIBILITY;
     double invicibility;
-    Media hitSound;
-    MediaPlayer hitSoundPlayer;
+
 
     public Hero(double x, double y, String fileName, double xEcran, double yEcran){
         super(x,y,fileName,xEcran,yEcran);
@@ -26,8 +22,6 @@ public class Hero extends AnimatedThing {
         INVICIBILITY = 2; // durée d'invicibilité en secondes
         invicibility = 0;
         touched = false;
-        //hitSound = new Media(new File("src\\hit_sound.mp3").toURI().toString());
-        //hitSoundPlayer = new MediaPlayer(hitSound);
     }
 
 
